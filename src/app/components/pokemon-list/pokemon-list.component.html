@@ -1,0 +1,31 @@
+<table mat-table [dataSource]="pokemonArray" class="mat-elevation-z8">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element">
+      <a (click)="navigateToDetails(element.name)">{{ element.name | pokemonNameTransform}}</a> <!-- Llama a la función de navegación -->
+    </td>
+  </ng-container>
+
+  <!-- URL Column -->
+  <ng-container matColumnDef="url">
+    <th mat-header-cell *matHeaderCellDef> URL </th>
+    <td mat-cell *matCellDef="let element"> {{ element.url }} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="favorite">
+      <th mat-header-cell *matHeaderCellDef> Favorite </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon (click)="toggleFavorite(element)" [color]="isFavorite(element) ? 'primary' : 'inherit'">
+          {{ isFavorite(element) ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+      </td>
+    </ng-container>
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<a routerLink="/favorites">Ver Favoritos</a>
